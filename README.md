@@ -48,4 +48,4 @@ PARTS LIST:
 
 - Tension springs x5 (completely up to you what gauge springs you use as long as they are under 30mm long) 
 
-
+- 5mm diameter 1.6mm thick Magnets x10
