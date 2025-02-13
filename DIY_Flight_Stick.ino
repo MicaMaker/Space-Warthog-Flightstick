@@ -79,8 +79,23 @@ void loop() {
   yAxis_ = map(yAxis_,1023,0,0,255);
   Joystick.setYAxis(yAxis_);
   
+  const int deadzone = 15;  // Adjust as needed (0-255 scale)
+  const int midPoint = 127; // Neutral position
+
   zAxis_ = analogRead(joyAxisZ);
-  zAxis_ = map(zAxis_,0,1023,0,255);
+  zAxis_ = map(zAxis_, 0, 1023, 0, 255);
+
+  // Apply deadzone with smooth transition
+  if (abs(zAxis_ - midPoint) < deadzone) {
+    zAxis_ = midPoint; // Stay neutral inside deadzone
+  } else {
+    if (zAxis_ > midPoint) {
+        zAxis_ = map(zAxis_, midPoint + deadzone, 255, midPoint, 255);
+    } else {
+        zAxis_ = map(zAxis_, midPoint - deadzone, 0, midPoint, 0);
+    }
+  }
+
   Joystick.setZAxis(zAxis_);
 
 
